@@ -30,7 +30,7 @@ export default function Sidebar() {
         <p className="sidebar_user_info">{data.user}</p>
       </div>
 
-      <Stack direction="row" spacing={1} sx={{ mt: 3, mb: 3 }}>
+      <Stack direction="row" spacing={1} sx={{ mt: 2, mb: 0 }}>
         <Link to="/messages">
           <IconButton color="secondary" aria-label="Messages">
             <EmailIcon />
@@ -90,6 +90,21 @@ export default function Sidebar() {
             to="/education"
           >
             الشؤون التعليمية
+          </NavLink>
+        </ListItem>
+        <ListItem
+          sx={{ display: "flex", justifyContent: "flex-end" }}
+          secondaryAction={
+            <IconButton aria-label="الشؤون المالية">
+              <ViewListRoundedIcon />
+            </IconButton>
+          }
+        >
+          <NavLink
+            className={(nav) => (nav.isActive ? "active" : "link")}
+            to="/financial"
+          >
+            الشؤون المالية
           </NavLink>
         </ListItem>
         <ListItem

@@ -1,11 +1,11 @@
 import React from "react";
 import { Typography } from "@mui/material";
-import "./Home.css";
-export default function home() {
+import "./Administration.css";
+export default function Administration() {
   return (
     <>
       <Typography variant="h2" component="h2">
-        لوحة التحكم الرئيسية
+        الشؤون الإدارية
       </Typography>
       ;
     </>
