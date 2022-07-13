@@ -1,6 +1,6 @@
 import React from "react";
 import "./Sidebar.css";
-import { List, ListItem } from "@mui/material";
+import { List, ListItem, Box } from "@mui/material";
 import { NavLink, Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
@@ -16,7 +16,19 @@ import { data } from "../../Data";
 export default function Sidebar() {
   console.log(data.image);
   return (
-    <div className="sidebar_container">
+    <Box
+      component="div"
+      sx={{
+        display: ["none", "none", "flex"],
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        height: "100vh",
+        width: 280,
+        overflow: "auto",
+      }}
+      className="sidebar_container"
+    >
       <img src={logo} alt="logo" className="sidebar_logo" />
       <div className="sidebar_user">
         <Avatar
@@ -46,7 +58,7 @@ export default function Sidebar() {
           <LogoutIcon />
         </IconButton>
       </Stack>
-      <List sx={{ width: "100%", maxWidth: 360 }}>
+      <List sx={{ width: "100%" }}>
         <ListItem
           sx={{ display: "flex", justifyContent: "flex-end" }}
           secondaryAction={
@@ -123,6 +135,6 @@ export default function Sidebar() {
           </NavLink>
         </ListItem>
       </List>
-    </div>
+    </Box>
   );
 }

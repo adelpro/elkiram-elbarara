@@ -20,6 +20,19 @@
     overflow: hidden;
 }
 
+.nav {
+    position: fixed;
+    z-index: 4;
+    top: 40px;
+    right: 20px;
+    height: 44px;
+    width: 100px;
+    overflow: hidden;
+    color: transparent;
+    white-space: nowrap;
+    text-indent: 100%;
+}
+
 .main {
     display: flex;
     background-color: aquamarine;

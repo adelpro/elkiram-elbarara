@@ -10,27 +10,32 @@ import Messages from "./pages/Messages/Messages";
 import Administration from "./pages/Administration/Administration";
 import Education from "./pages/Education/Education";
 import Financial from "./pages/Financial/Financial";
+import MobileSideBar from "./components/MobileSideBar/MobileSideBar";
 function App() {
   return (
-    <div className="App">
-      <div className="App_container">
-        <Sidebar />
-        <div className="main">
-          <Routes>
-            <Route path="home" element={<Home />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/administration" element={<Administration />} />
-            <Route path="/education" element={<Education />} />
-            <Route path="/financial" element={<Financial />} />
-
-            <Route path="/about" element={<About />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/configuration" element={<Configuration />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+    <>
+      <div className="App">
+        <div className="App_container">
+          <div className="nav">
+            <MobileSideBar />
+          </div>
+          <Sidebar />
+          <div className="main">
+            <Routes>
+              <Route path="home" element={<Home />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/administration" element={<Administration />} />
+              <Route path="/education" element={<Education />} />
+              <Route path="/financial" element={<Financial />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/messages" element={<Messages />} />
+              <Route path="/configuration" element={<Configuration />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
