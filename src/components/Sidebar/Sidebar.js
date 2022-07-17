@@ -1,6 +1,6 @@
 import React from "react";
 import "./Sidebar.css";
-import { Box } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
@@ -11,6 +11,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import { data } from "../../Data";
 import SideBarList from "../SideBarList/SideBarList";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 export default function Sidebar() {
   return (
     <Box
@@ -45,19 +46,32 @@ export default function Sidebar() {
       </div>
 
       <Stack direction="row" spacing={1} sx={{ mt: 2, mb: 0 }}>
+        <Link to="/profile">
+          <Tooltip title="الملف الشخصي">
+            <IconButton color="secondary" aria-label="Profile">
+              <AccountCircleRoundedIcon />
+            </IconButton>
+          </Tooltip>
+        </Link>
         <Link to="/messages">
-          <IconButton color="secondary" aria-label="Messages">
-            <EmailIcon />
-          </IconButton>
+          <Tooltip title="الرسائل">
+            <IconButton color="secondary" aria-label="Messages">
+              <EmailIcon />
+            </IconButton>
+          </Tooltip>
         </Link>
         <Link to="/configuration">
-          <IconButton color="primary" aria-label="Settings">
-            <SettingsRoundedIcon />
-          </IconButton>
+          <Tooltip title="الإعدادات">
+            <IconButton color="primary" aria-label="Settings">
+              <SettingsRoundedIcon />
+            </IconButton>
+          </Tooltip>
         </Link>
-        <IconButton color="primary" aria-label="Logout">
-          <LogoutIcon />
-        </IconButton>
+        <Tooltip title="تسجيل الخروج">
+          <IconButton color="primary" aria-label="Logout">
+            <LogoutIcon />
+          </IconButton>
+        </Tooltip>
       </Stack>
       <SideBarList />
     </Box>

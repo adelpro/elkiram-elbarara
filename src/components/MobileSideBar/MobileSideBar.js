@@ -7,7 +7,7 @@ import {
   Avatar,
   Box,
 } from "@mui/material";
-import logo from "../../assets/logo_small_2.png";
+
 import { data } from "../../Data";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -18,14 +18,16 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import React from "react";
 import { useState } from "react";
 import "./MobileSideBar.css";
+import logo from "../../assets/logo_small_2.png";
 import SideBarList from "../SideBarList/SideBarList";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 export default function MobileSideBar() {
   const [open, setopen] = useState(false);
   return (
     <>
-      <Toolbar sx={{ display: ["flex", "flex", "none"], ml: "auto" }}>
+      <Toolbar sx={{ display: ["flex", "flex", "none"] }}>
         <IconButton onClick={() => setopen(true)}>
-          <MenuIcon />
+          <MenuIcon fontSize="large" />
         </IconButton>
       </Toolbar>
       <SwipeableDrawer
@@ -44,6 +46,12 @@ export default function MobileSideBar() {
           </IconButton>
         </div>
         <Divider />
+        <img
+          src={logo}
+          alt="logo"
+          className="sidebar_logo"
+          style={{ width: 200, height: 200, objectFit: "contain" }}
+        />
         <Box
           component="div"
           sx={{
@@ -57,12 +65,6 @@ export default function MobileSideBar() {
           }}
           className="sidebar_container"
         >
-          <img
-            src={logo}
-            alt="logo"
-            className="sidebar_logo"
-            style={{ width: 200, height: 200, objectFit: "contain" }}
-          />
           <div className="sidebar_user">
             <Avatar
               src={data.image}
@@ -76,6 +78,11 @@ export default function MobileSideBar() {
           </div>
 
           <Stack direction="row" spacing={1} sx={{ mt: 2, mb: 0 }}>
+            <Link to="/profile">
+              <IconButton color="secondary" aria-label="الملف الشخصي">
+                <AccountCircleRoundedIcon />
+              </IconButton>
+            </Link>
             <Link to="/messages">
               <IconButton color="secondary" aria-label="Messages">
                 <EmailIcon />

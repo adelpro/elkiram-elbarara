@@ -11,6 +11,9 @@ import Administration from "./pages/Administration/Administration";
 import Education from "./pages/Education/Education";
 import Financial from "./pages/Financial/Financial";
 import MobileSideBar from "./components/MobileSideBar/MobileSideBar";
+import MobileHeader from "./components/MobileHeader/MobileHeader";
+import Profile from "./pages/Profile/Profile";
+import Footer from "./components/Footer/Footer";
 function App() {
   return (
     <>
@@ -21,6 +24,7 @@ function App() {
           </div>
           <Sidebar />
           <div className="main">
+            <MobileHeader />
             <Routes>
               <Route path="home" element={<Home />} />
               <Route path="/" element={<Home />} />
@@ -30,8 +34,10 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/messages" element={<Messages />} />
               <Route path="/configuration" element={<Configuration />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
+            <Footer />
           </div>
         </div>
       </div>
