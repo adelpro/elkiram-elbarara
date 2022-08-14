@@ -1,0 +1,18 @@
+.profile_avatar_badge {
+    position: relative;
+    bottom: 40px;
+    left: 10px;
+    background-color: #ccc;
+    font-size: large;
+    border-radius: 20%;
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    text-align: center;
+}
+
+.profile_avatar {
+    margin-top: 30px;
+    margin-bottom: 0px;
+    height: 130px;
+    cursor: pointer;
+}

@@ -39,7 +39,7 @@
 
 .main {
     display: flex;
-    background-color: #CAF0F8;
+
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;

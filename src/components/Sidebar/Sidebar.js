@@ -1,18 +1,26 @@
 import React from "react";
 import "./Sidebar.css";
 import { Box, Tooltip } from "@mui/material";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { loggedinState, datastate } from "../../recoil/atom";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import logo from "../../assets/logo_small_2.png";
 import IconButton from "@mui/material/IconButton";
-import EmailIcon from "@mui/icons-material/Email";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import { data } from "../../Data";
-import SideBarList from "../SideBarList/SideBarList";
+import SideBarListDirector from "../SideBarListDirector/SideBarListDirector";
+import SideBarListStudent from "../SideBarListStudent/SideBarListStudent";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 export default function Sidebar() {
+  const [data, setdata] = useRecoilState(datastate);
+  const [loggedin, setLoggedin] = useRecoilState(loggedinState);
+  const logoutHundler = () => {
+    console.log("logout");
+    setLoggedin(false);
+    setdata({});
+  };
   return (
     <Box
       component="div"
@@ -24,26 +32,31 @@ export default function Sidebar() {
         height: "100vh",
         width: 280,
         overflow: "auto",
+        backgroundColor: "#fcfbfb",
       }}
       className="sidebar_container"
     >
-      <img
+      <Box
+        component="img"
+        sx={{
+          height: 120,
+          width: 120,
+          objectFit: "cover",
+          mt: 2,
+        }}
+        alt="Logo"
         src={logo}
-        alt="logo"
-        className="sidebar_logo"
-        style={{ width: 200, height: 200, objectFit: "contain" }}
       />
+
       <div className="sidebar_user">
         <Avatar
-          src={data.image}
+          src={data.profilepic}
           alt="avatar"
           sx={{ width: 100, height: 100, mt: 2, mb: 2 }}
         />
-        <span className="avatar_badge">مدير</span>
+        <span className="mobile_avatar_badge">{data.role}</span>
       </div>
-      <div>
-        <p className="sidebar_user_info">{data.user}</p>
-      </div>
+      <div className="mobile_sidebar_user_info">{data.name}</div>
 
       <Stack direction="row" spacing={1} sx={{ mt: 2, mb: 0 }}>
         <Link to="/profile">
@@ -53,13 +66,7 @@ export default function Sidebar() {
             </IconButton>
           </Tooltip>
         </Link>
-        <Link to="/messages">
-          <Tooltip title="الرسائل">
-            <IconButton color="secondary" aria-label="Messages">
-              <EmailIcon />
-            </IconButton>
-          </Tooltip>
-        </Link>
+
         <Link to="/configuration">
           <Tooltip title="الإعدادات">
             <IconButton color="primary" aria-label="Settings">
@@ -68,12 +75,17 @@ export default function Sidebar() {
           </Tooltip>
         </Link>
         <Tooltip title="تسجيل الخروج">
-          <IconButton color="primary" aria-label="Logout">
+          <IconButton
+            color="primary"
+            aria-label="Logout"
+            onClick={logoutHundler}
+          >
             <LogoutIcon />
           </IconButton>
         </Tooltip>
       </Stack>
-      <SideBarList />
+      {data.role === "مدير" ? <SideBarListDirector /> : null}
+      {data.role === "طالب" ? <SideBarListStudent /> : null}
     </Box>
   );
 }

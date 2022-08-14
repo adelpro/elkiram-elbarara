@@ -1,10 +1,19 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import "./Home.css";
 export default function home() {
   return (
-    <Typography variant="h2" component="h2">
-      لوحة التحكم الرئيسية
-    </Typography>
+    <Box
+      sx={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
+      <Typography variant="h2" component="h2">
+        لوحة التحكم الرئيسية
+      </Typography>
+    </Box>
   );
 }

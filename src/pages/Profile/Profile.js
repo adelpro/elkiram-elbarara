@@ -1,9 +1,20 @@
-import { AppBar, Avatar, Grid, TextField, Typography } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Grid,
+  IconButton,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
+import { useRecoilState } from "recoil";
+import { loggedinState, datastate } from "../../recoil/atom";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import "./Profile.css";
-import { data } from "../../Data";
 import { Box } from "@mui/system";
 export default function Profile() {
+  const [data, setdata] = useRecoilState(datastate);
   const InputStyle = {
     width: "100%",
     maxWidth: "400px",
@@ -21,13 +32,16 @@ export default function Profile() {
   return (
     <>
       <AppBar position="static" color="secondary">
-        <Box sx={{ textAlign: "right", p: 2, mr: 5 }}>
+        <Stack direction="row-reverse" spacing={1} alignItems={"center"}>
+          <IconButton sx={{ color: "white" }}>
+            <AccountCircleRoundedIcon />
+          </IconButton>
           <Typography variant="h6">الملف الشخصي</Typography>
-        </Box>
+        </Stack>
       </AppBar>
       <div className="profile_avatar">
         <Avatar
-          src={data.image}
+          src={data.profilepic}
           alt="avatar"
           sx={{ width: 150, height: 150, mt: 2, mb: 2 }}
         />

@@ -7,22 +7,29 @@ import {
   Avatar,
   Box,
 } from "@mui/material";
-
-import { data } from "../../Data";
 import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
-import EmailIcon from "@mui/icons-material/Email";
 import LogoutIcon from "@mui/icons-material/Logout";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import React from "react";
 import { useState } from "react";
 import "./MobileSideBar.css";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { loggedinState, datastate } from "../../recoil/atom";
 import logo from "../../assets/logo_small_2.png";
-import SideBarList from "../SideBarList/SideBarList";
+import SideBarListDirector from "../SideBarListDirector/SideBarListDirector";
+import SideBarListStudent from "../SideBarListStudent/SideBarListStudent";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 export default function MobileSideBar() {
+  const [data, setdata] = useRecoilState(datastate);
+  const [loggedin, setLoggedin] = useRecoilState(loggedinState);
   const [open, setopen] = useState(false);
+  const logoutHundler = () => {
+    console.log("logout");
+    setLoggedin(false);
+    setdata({});
+  };
   return (
     <>
       <Toolbar sx={{ display: ["flex", "flex", "none"] }}>
@@ -46,12 +53,7 @@ export default function MobileSideBar() {
           </IconButton>
         </div>
         <Divider />
-        <img
-          src={logo}
-          alt="logo"
-          className="sidebar_logo"
-          style={{ width: 200, height: 200, objectFit: "contain" }}
-        />
+
         <Box
           component="div"
           sx={{
@@ -62,30 +64,35 @@ export default function MobileSideBar() {
             height: "100vh",
             width: 280,
             overflow: "auto",
+            backgroundColor: "#fcfbfb",
           }}
-          className="sidebar_container"
+          className="mobile_sidebar_container"
         >
-          <div className="sidebar_user">
+          <Box
+            component="img"
+            sx={{
+              height: 120,
+              width: 120,
+              objectFit: "cover",
+              mt: 2,
+            }}
+            alt="Logo"
+            src={logo}
+          />
+          <div className="mobile_sidebar_user">
             <Avatar
-              src={data.image}
+              src={data.profilepic}
               alt="avatar"
               sx={{ width: 100, height: 100, mt: 2, mb: 2 }}
             />
-            <span className="avatar_badge">مدير</span>
+            <span className="mobile_avatar_badge">{data.role}</span>
           </div>
-          <div>
-            <p className="sidebar_user_info">{data.user}</p>
-          </div>
+          <div className="mobile_sidebar_user_info">{data.name}</div>
 
           <Stack direction="row" spacing={1} sx={{ mt: 2, mb: 0 }}>
             <Link to="/profile">
               <IconButton color="secondary" aria-label="الملف الشخصي">
                 <AccountCircleRoundedIcon />
-              </IconButton>
-            </Link>
-            <Link to="/messages">
-              <IconButton color="secondary" aria-label="Messages">
-                <EmailIcon />
               </IconButton>
             </Link>
             <Link to="/configuration">
@@ -94,11 +101,16 @@ export default function MobileSideBar() {
               </IconButton>
             </Link>
 
-            <IconButton color="primary" aria-label="Logout">
+            <IconButton
+              color="primary"
+              aria-label="Logout"
+              onClick={logoutHundler}
+            >
               <LogoutIcon />
             </IconButton>
           </Stack>
-          <SideBarList />
+          {data.role === "مدير" ? <SideBarListDirector /> : null}
+          {data.role === "طالب" ? <SideBarListStudent /> : null}
         </Box>
       </SwipeableDrawer>
     </>

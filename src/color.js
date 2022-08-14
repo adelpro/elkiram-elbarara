@@ -9,4 +9,5 @@ bleu_palette = [
   { midle: "#90E0EF" },
   { blizard: "#ADE8F4" },
   { light_cyan: "#CAF0F8" },
+  { light_gray: "#fcfbfb" },
 ];
